@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot — Image Recognition</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Image Recognition</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content container">
+    <section class="chat-section">
+      <div class="chat-header">
+        <div>
+          <h2>ChatGPT-style AI assistant</h2>
+          <p class="chat-subtitle">Type a prompt, upload an image, or choose an action below to explore image recognition.</p>
+        </div>
+      </div>
+
+      <div class="chat-app">
+        <div class="chat-panel">
+          <div class="chat-messages">
+            <div class="message bot">
+              <div class="message-role">Assistant</div>
+              <p>Hi there! I can help analyze images and answer questions in agriculture, health, security, business and education.</p>
+            </div>
+            <div class="message user">
+              <div class="message-role">You</div>
+              <p>Show me how to use photo input for crop disease detection.</p>
+            </div>
+            <div class="message bot">
+              <div class="message-role">Assistant</div>
+              <p>To begin, upload a photo using the button below, then describe the problem or choose a focus area.</p>
+            </div>
+          </div>
+
+          <form class="chat-input-card" action="#" method="post">
+            <div class="chat-actions-row">
+              <label class="nav-item" for="image-upload">+ Upload Image</label>
+              <button class="nav-item secondary" type="button">+ Ask Question</button>
+              <button class="nav-item secondary" type="button">+ Select Focus</button>
+              <a class="nav-item" href="#tips">+ Tips</a>
+            </div>
+            <input id="image-upload" type="file" accept="image/*" hidden>
+
+            <div class="chat-input-area">
+              <textarea placeholder="Type your message here..." rows="4"></textarea>
+              <button class="send-button" type="submit">Send</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="chat-sidebar" id="tips">
+          <div class="sidebar-card">
+            <h3>Tips</h3>
+            <ul>
+              <li>Use clear image descriptions for better results.</li>
+              <li>Upload close-up photos of plants, wounds, or products.</li>
+              <li>Ask specific questions about crop health or object detection.</li>
+              <li>Select a focus area like Agriculture, Health, Security, Business or Education.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>The chatbot page is built with external styles and no JavaScript.</p>
+    </div>
+  </footer>
+</body>
+</html>
