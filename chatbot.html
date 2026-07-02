@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot — Image Recognition</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Image Recognition</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content container">
+    <section class="chat-section">
+      <div class="chat-header">
+        <div>
+          <h2>AI Assistant</h2>
+          <p class="chat-subtitle" id="service-subtitle">Ask questions using text, voice, or upload an image</p>
+        </div>
+      </div>
+
+      <div class="chat-app">
+        <div class="chat-panel">
+          <div class="chat-messages" id="chat-messages">
+            <div class="message bot">
+              <div class="message-role">Assistant</div>
+              <p>Hi there! I'm ready to help you with text questions, voice commands, or image analysis. How can I assist you today?</p>
+            </div>
+          </div>
+
+          <form class="chat-input-card" id="chat-form">
+            <!-- Input Type Selector -->
+            <div class="input-type-selector">
+              <label class="input-type-btn active" data-type="text">
+                <input type="radio" name="input-type" value="text" checked>
+                <span>💬 Text</span>
+              </label>
+              <label class="input-type-btn" data-type="audio">
+                <input type="radio" name="input-type" value="audio">
+                <span>🎤 Voice</span>
+              </label>
+              <label class="input-type-btn" data-type="image">
+                <input type="radio" name="input-type" value="image">
+                <span>🖼️ Image</span>
+              </label>
+            </div>
+
+            <!-- Text Input Section -->
+            <div class="input-section" id="text-input-section">
+              <textarea id="text-input" placeholder="Type your question here..." rows="4"></textarea>
+            </div>
+
+            <!-- Audio Input Section -->
+            <div class="input-section hidden" id="audio-input-section">
+              <div class="audio-controls">
+                <button type="button" id="start-recording" class="btn-icon">🎙️ Start Recording</button>
+                <button type="button" id="stop-recording" class="btn-icon hidden">⏹️ Stop Recording</button>
+                <div id="audio-transcript" class="audio-transcript"></div>
+                <audio id="audio-playback" controls style="width: 100%; margin-top: 10px;"></audio>
+              </div>
+            </div>
+
+            <!-- Image Input Section -->
+            <div class="input-section hidden" id="image-input-section">
+              <label class="image-upload-label">
+                <span>📤 Click to upload image or drag & drop</span>
+                <input type="file" id="image-upload" accept="image/*" hidden>
+              </label>
+              <div id="image-preview-container" class="image-preview-container"></div>
+              <textarea id="image-description" placeholder="Describe what you want to know about this image..." rows="3"></textarea>
+            </div>
+
+            <!-- Send Button -->
+            <button class="send-button" type="submit">Send</button>
+          </form>
+        </div>
+
+        <aside class="chat-sidebar" id="tips">
+          <div class="sidebar-card">
+            <h3>💡 Tips</h3>
+            <ul>
+              <li>✅ Use clear questions for better results</li>
+              <li>✅ Upload close-up photos for image analysis</li>
+              <li>✅ Ask specific questions about your service</li>
+              <li>✅ Use voice for quick questions</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>The chatbot page is built with external styles and JavaScript authentication.</p>
+    </div>
+  </footer>
+
+  <script src="security.js"></script>
+  <script>
+    // Chatbot Intelligence Module
+    class ChatbotAssistant {
+      constructor() {
+        this.messages = [];
+        this.currentService = new URLSearchParams(window.location.search).get('service') || 'general';
+        this.mediaRecorder = null;
+        this.audioChunks = [];
+      }
+
+      // Get service-specific responses
+      getResponse(userMessage, service = this.currentService) {
+        const msg = userMessage.toLowerCase();
+        
+        const responses = {
+          agriculture: [
+            "For agriculture, I can help with crop disease detection, soil analysis, and plant health assessment. Could you provide more details or upload an image?",
+            "Based on the image, this appears to be a healthy plant. Continue regular monitoring and irrigation schedules.",
+            "I can see signs of nutrient deficiency. Consider soil testing and appropriate fertilization.",
+            "This looks like pest damage. I recommend consulting with agricultural extension services for treatment options."
+          ],
+          health: [
+            "For health-related image analysis, I can provide general visual observations. Always consult healthcare professionals for medical diagnosis.",
+            "I can see some areas of concern in the image. Please consult with a qualified medical professional.",
+            "For medical imaging interpretation, professional medical review is essential.",
+            "This image may indicate further investigation needed. Please seek professional medical advice."
+          ],
+          security: [
+            "For security analysis, I can help with scene analysis and object detection. What would you like me to analyze?",
+            "I've identified several objects in this image. Here are my observations...",
+            "The security scan shows normal conditions.",
+            "I've detected potential anomalies. Please review with your security team."
+          ],
+          business: [
+            "For business applications, I can assist with product recognition and inventory analysis.",
+            "Based on the image, I can identify the product details for inventory management.",
+            "This appears to be a product of quality grade B. Further inspection recommended.",
+            "Invoice analysis complete. All items verified and documented."
+          ],
+          education: [
+            "Great question! Let me explain this concept in detail...",
+            "This image shows a great example of the principle we're studying.",
+            "From an educational perspective, this demonstrates...",
+            "Here's an interesting learning point about what you're asking..."
+          ]
+        };
+
+        const serviceResponses = responses[service] || responses.general;
+        
+        // Simple logic to pick appropriate response
+        if (msg.includes('image') || msg.includes('photo') || msg.includes('upload')) {
+          return serviceResponses[0];
+        } else if (msg.includes('health') || msg.includes('disease') || msg.includes('sick')) {
+          return serviceResponses[1];
+        } else if (msg.includes('problem') || msg.includes('issue') || msg.includes('help')) {
+          return serviceResponses[2];
+        } else {
+          return serviceResponses[Math.floor(Math.random() * serviceResponses.length)];
+        }
+      }
+
+      // Add message to chat
+      addMessage(text, type = 'user', hasImage = false) {
+        const messagesDiv = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        
+        let content = `<div class="message-role">${type === 'user' ? 'You' : 'Assistant'}</div>`;
+        
+        if (hasImage) {
+          content += `<div class="message-image"><img src="${text}" alt="Uploaded image"></div>`;
+        } else {
+          content += `<p>${this.escapeHtml(text)}</p>`;
+        }
+        
+        messageDiv.innerHTML = content;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Handle text input
+      handleTextInput(text) {
+        if (!text.trim()) return;
+        this.addMessage(text, 'user');
+        setTimeout(() => {
+          const response = this.getResponse(text);
+          this.addMessage(response, 'bot');
+        }, 500);
+      }
+
+      // Handle image input
+      handleImageInput(imageFile, description) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageUrl = e.target.result;
+          this.addMessage(imageUrl, 'user', true);
+          
+          const userText = description || "Please analyze this image";
+          this.addMessage(userText, 'user');
+          
+          setTimeout(() => {
+            const response = this.getResponse(userText);
+            this.addMessage(response, 'bot');
+          }, 500);
+        };
+        reader.readAsDataURL(imageFile);
+      }
+
+      // Handle audio input
+      handleAudioInput(transcript) {
+        if (!transcript.trim()) return;
+        this.addMessage(`🎤 ${transcript}`, 'user');
+        setTimeout(() => {
+          const response = this.getResponse(transcript);
+          this.addMessage(response, 'bot');
+        }, 500);
+      }
+    }
+
+    const chatbot = new ChatbotAssistant();
+
+    // Update service subtitle
+    const serviceNames = {
+      agriculture: '🌾 Agriculture Assistant',
+      health: '🏥 Health Assistant',
+      security: '🔒 Security Assistant',
+      business: '💼 Business Assistant',
+      education: '📚 Education Assistant'
+    };
+    
+    document.getElementById('service-subtitle').textContent = serviceNames[chatbot.currentService] || 'General Assistant';
+
+    // Input type switching
+    document.querySelectorAll('.input-type-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.input-type-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        const type = this.dataset.type;
+        document.querySelectorAll('.input-section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(`${type}-input-section`).classList.remove('hidden');
+      });
+    });
+
+    // Text input handling
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputType = document.querySelector('input[name="input-type"]:checked').value;
+      
+      if (inputType === 'text') {
+        const text = document.getElementById('text-input').value;
+        chatbot.handleTextInput(text);
+        document.getElementById('text-input').value = '';
+      } else if (inputType === 'audio') {
+        const transcript = document.getElementById('audio-transcript').textContent;
+        if (transcript) {
+          chatbot.handleAudioInput(transcript);
+          document.getElementById('audio-transcript').textContent = '';
+        }
+      } else if (inputType === 'image') {
+        const imageFile = document.getElementById('image-upload').files[0];
+        if (imageFile) {
+          const description = document.getElementById('image-description').value;
+          chatbot.handleImageInput(imageFile, description);
+          document.getElementById('image-upload').value = '';
+          document.getElementById('image-description').value = '';
+          document.getElementById('image-preview-container').innerHTML = '';
+        }
+      }
+    });
+
+    // Audio recording
+    let mediaRecorder;
+    let audioChunks = [];
+
+    document.getElementById('start-recording').addEventListener('click', async function(e) {
+      e.preventDefault();
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        
+        mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          const url = URL.createObjectURL(audioBlob);
+          document.getElementById('audio-playback').src = url;
+          
+          // Simple speech recognition simulation
+          const transcript = "Please analyze this image for me";
+          document.getElementById('audio-transcript').textContent = transcript;
+        };
+        
+        mediaRecorder.start();
+        this.classList.add('hidden');
+        document.getElementById('stop-recording').classList.remove('hidden');
+      } catch (err) {
+        alert('Microphone access denied. Please enable microphone permissions.');
+      }
+    });
+
+    document.getElementById('stop-recording').addEventListener('click', function(e) {
+      e.preventDefault();
+      mediaRecorder.stop();
+      this.classList.add('hidden');
+      document.getElementById('start-recording').classList.remove('hidden');
+    });
+
+    // Image preview and drag-drop
+    const imageUpload = document.getElementById('image-upload');
+    const imageUploadLabel = document.querySelector('.image-upload-label');
+
+    imageUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const previewContainer = document.getElementById('image-preview-container');
+          previewContainer.innerHTML = `<img src="${event.target.result}" alt="Preview" class="image-preview">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Drag and drop
+    imageUploadLabel.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      imageUploadLabel.style.background = 'rgba(56, 189, 248, 0.2)';
+    });
+
+    imageUploadLabel.addEventListener('dragleave', () => {
+      imageUploadLabel.style.background = '';
+    });
+
+    imageUploadLabel.addEventListener('drop', (e) => {
+      e.preventDefault();
+      imageUploadLabel.style.background = '';
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        imageUpload.files = files;
+        const event = new Event('change', { bubbles: true });
+        imageUpload.dispatchEvent(event);
+      }
+    });
+
+    // Click to upload
+    imageUploadLabel.addEventListener('click', () => {
+      imageUpload.click();
+    });
+  </script>
+</body>
+</html>
