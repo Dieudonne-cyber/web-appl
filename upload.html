@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload | AI Recognition &amp; Chatbot System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="site-navbar"></div>
+
+  <main>
+    <div class="container narrow">
+      <h1 class="page-title">Upload an Image for Recognition</h1>
+
+      <div class="panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image file">
+          <p>Drag &amp; drop an image here, or click to browse</p>
+          <button type="button" class="btn btn-primary" id="browse-btn">Choose File</button>
+          <input type="file" id="file-input" accept="image/*" class="visually-hidden" />
+        </div>
+
+        <div class="upload-preview" id="upload-preview" style="display:none;">
+          <img id="preview-img" alt="Preview of the selected image" />
+          <p class="upload-filename" id="preview-name"></p>
+        </div>
+
+        <p class="form-message" id="upload-status" role="alert"></p>
+
+        <div class="upload-actions">
+          <button type="button" class="btn btn-primary" id="analyze-btn" disabled>Upload &amp; Analyze</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 AI-Powered Image Recognition and Intelligent Chatbot System — Web Design Project.
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/ai-services.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>

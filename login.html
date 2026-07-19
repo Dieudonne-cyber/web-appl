@@ -1,72 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Image Recognition</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | AI Recognition &amp; Chatbot System</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">Image Recognition</a>
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="chatbot.html">Chatbot</a>
-        <a href="login.html">Login</a>
-        <a href="signup.html">Sign Up</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="content container">
-    <section class="auth-section">
-      <h2>Login</h2>
-      <form class="auth-form" action="#" method="post">
-        <label>
-          Email
-          <input type="email" name="email" placeholder="you@example.com" required>
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" placeholder="Password" required>
-        </label>
-        <button class="btn" type="submit">Login</button>
-        <p class="auth-note">This login page is a static HTML/CSS prototype without backend connectivity.</p>
-        <p class="auth-footer">New here? <a href="signup.html">Create an account</a></p>
-      </form>
-    </section>
+  <div id="site-navbar"></div>
+
+  <main>
+    <div class="container narrow">
+      <div class="card">
+        <h1 class="page-title">Login</h1>
+
+        <div class="form-message" id="form-message" role="alert"></div>
+
+        <form id="login-form" novalidate>
+          <div class="form-field">
+            <label for="identifier">Username or Email</label>
+            <input type="text" id="identifier" name="identifier" autocomplete="username" required />
+            <p class="field-error" id="identifier-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required />
+            <p class="field-error" id="password-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+
+        <p class="form-footnote"><a href="#" onclick="alert('Password recovery is not implemented in this prototype.'); return false;">Forgot password?</a></p>
+        <p class="form-footnote">New here? <a href="register.html">Create an account</a></p>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>Login is styled with external CSS and JavaScript authentication.</p>
-    </div>
+    &copy; 2026 AI-Powered Image Recognition and Intelligent Chatbot System — Web Design Project.
   </footer>
 
-  <script src="security.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/auth.js"></script>
   <script>
-    // Protect page - redirect if already logged in
-    if (authManager.isLoggedIn()) {
-      window.location.href = 'index.html';
-    }
-
-    // Handle login form submission
-    document.querySelector('.auth-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const email = document.querySelector('input[type="email"]').value.trim();
-      const password = document.querySelector('input[type="password"]').value;
-
-      const result = authManager.login(email, password);
-
-      if (result.success) {
-        alert(result.message);
-        window.location.href = 'index.html';
-      } else {
-        alert('Login Failed: ' + result.message);
-      }
-    });
+    document.addEventListener("DOMContentLoaded", () => renderNavbar("login"));
   </script>
 </body>
 </html>

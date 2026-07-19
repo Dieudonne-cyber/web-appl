@@ -1,217 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta Information -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Recognition - AI Visual Insights</title>
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | AI Recognition &amp; Chatbot System</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-  <!-- ========== HEADER / NAVIGATION ========== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <!-- Brand Logo -->
-      <a class="brand" href="index.html">🖼️ Image Recognition</a>
-      
-      <!-- Navigation Menu -->
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="chatbot.html">Chatbot</a>
-      </nav>
-    </div>
-  </header>
 
-  <!-- ========== MAIN CONTENT ========== -->
-  <main class="content container">
-    
-    <!-- HOME AND SIGNUP CONTAINER -->
-    <div class="home-signup-wrapper">
-      
-      <!-- ===== LEFT SIDE: HOME CONTENT ===== -->
-      <div class="home-section">
-        
-        <!-- HERO SECTION -->
-        <section class="hero-section">
-          <span class="eyebrow">Image recognition across key fields</span>
-          <h1>AI-powered visual insight for agriculture, health, security, business and education.</h1>
-          <p>Get instant answers using text, voice, or images. Select a service below to get started.</p>
-        </section>
+  <div id="site-navbar"></div>
 
-        <!-- SERVICES SECTION -->
-        <section class="feature-section">
-          <h2>Choose a Service</h2>
-          <p class="section-intro">Click any service to open the chatbot and start asking questions</p>
-          
-          <!-- Service Cards Grid -->
-          <div class="feature-grid">
-            
-            <!-- Agriculture Service Card -->
-            <a href="chatbot.html?service=agriculture" class="feature-card clickable-card">
-              <h3>Agriculture</h3>
-              <p>Detect crop health, identify plant disease, and support farm decisions from image inputs.</p>
-              <span class="card-arrow">→</span>
-            </a>
-
-            <!-- Health Service Card -->
-            <a href="chatbot.html?service=health" class="feature-card clickable-card">
-              <h3>Health</h3>
-              <p>Design medical imaging workflows, diagnostic insights, and visual analysis concepts.</p>
-              <span class="card-arrow">→</span>
-            </a>
-
-            <!-- Security Service Card -->
-            <a href="chatbot.html?service=security" class="feature-card clickable-card">
-              <h3>Security</h3>
-              <p>Support scene analysis, object recognition, and monitoring use cases.</p>
-              <span class="card-arrow">→</span>
-            </a>
-
-            <!-- Business Service Card -->
-            <a href="chatbot.html?service=business" class="feature-card clickable-card">
-              <h3>Business</h3>
-              <p>Enable product recognition, invoice checks, and inventory workflows with visual AI.</p>
-              <span class="card-arrow">→</span>
-            </a>
-
-            <!-- Education Service Card -->
-            <a href="chatbot.html?service=education" class="feature-card clickable-card">
-              <h3>Education</h3>
-              <p>Create learning experiences, tutorials, and visual explanations using image recognition.</p>
-              <span class="card-arrow">→</span>
-            </a>
-            
-          </div>
-          <!-- End Service Cards Grid -->
-          
-        </section>
-        <!-- End Services Section -->
-        
-      </div>
-      <!-- End Home Section -->
-
-      <!-- ===== RIGHT SIDE: SIGNUP FORM ===== -->
-      <aside class="signup-section">
-        <div class="signup-card">
-          <h2>Create Your Account</h2>
-          <p class="signup-subtitle">Join to access all AI services</p>
-          
-          <form class="auth-form" id="signup-form">
-            <label>
-              Full Name
-              <input type="text" name="name" placeholder="Your full name" required>
-            </label>
-            <label>
-              Email
-              <input type="email" name="email" placeholder="you@example.com" required>
-            </label>
-            <label>
-              Password
-              <input type="password" name="password" placeholder="Create a password (min 6 chars)" required>
-            </label>
-            <button class="btn" type="submit">Create Account</button>
-            
-            <p class="auth-footer">Already have an account? <a href="login.html">Login here</a></p>
-          </form>
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>AI-Powered Image Recognition &amp; Intelligent Chatbot System</h1>
+        <p>
+          Upload an image, get an instant AI-powered recognition result, and chat with our
+          assistant to understand exactly what it means and what to do next.
+        </p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary">Get Started</a>
+          <a href="#features" class="btn btn-secondary">Learn More</a>
         </div>
-      </aside>
-      <!-- End Signup Section -->
-      
-    </div>
-    <!-- End Home and Signup Wrapper -->
-    
-  </main>
-  <!-- End Main Content -->
+      </section>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>All pages use external CSS and JavaScript authentication.</p>
+      <section class="feature-grid" id="features">
+        <div class="card">
+          <h3>Image Recognition</h3>
+          <p>Upload a photo and receive an automated label with a confidence score in seconds.</p>
+        </div>
+        <div class="card">
+          <h3>AI Chatbot</h3>
+          <p>Ask follow-up questions and get plain-language explanations of your result.</p>
+        </div>
+        <div class="card">
+          <h3>Multi-domain Use</h3>
+          <p>Useful across agriculture, healthcare, security, business and education.</p>
+        </div>
+      </section>
     </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 AI-Powered Image Recognition and Intelligent Chatbot System — Web Design Project.
   </footer>
 
-  <!-- ========== SCRIPTS ========== -->
-  <script src="security.js"></script>
-  
-  <!-- Service Card Navigation -->
+  <script src="js/storage.js"></script>
+  <script src="js/nav.js"></script>
   <script>
-    // Make service cards interactive and sensitive to clicks
-    document.querySelectorAll('.clickable-card').forEach(card => {
-      // Add click handler
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Get the service name from the href
-        const href = this.getAttribute('href');
-        
-        // Add visual feedback - fade out effect
-        this.style.opacity = '0.7';
-        this.style.transform = 'scale(0.98)';
-        
-        // Navigate after a short delay for visual effect
-        setTimeout(() => {
-          window.location.href = href;
-        }, 200);
-      });
-
-      // Add hover effects for better UX
-      card.addEventListener('mouseenter', function() {
-        this.style.cursor = 'pointer';
-      });
-
-      // Reset opacity on mouse leave if not navigating
-      card.addEventListener('mouseleave', function() {
-        this.style.opacity = '1';
-        this.style.transform = 'scale(1)';
-      });
-
-      // Keyboard support - allow Enter and Space keys
-      card.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.click();
-        }
-      });
-    });
-
-    // Log which service was selected (for debugging)
-    window.addEventListener('click', function(e) {
-      const card = e.target.closest('.clickable-card');
-      if (card) {
-        const href = card.getAttribute('href');
-        const serviceMatch = href.match(/service=(\w+)/);
-        if (serviceMatch) {
-          console.log('Service selected:', serviceMatch[1]);
-        }
-      }
-    });
-
-    // Handle signup form submission
-    document.getElementById('signup-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const fullName = this.querySelector('input[type="text"]').value.trim();
-      const email = this.querySelector('input[type="email"]').value.trim();
-      const password = this.querySelector('input[type="password"]').value;
-
-      if (!fullName) {
-        alert('Please enter your full name');
-        return;
-      }
-
-      const result = authManager.register(email, password, fullName);
-
-      if (result.success) {
-        alert(result.message + '\nYou can now login with your credentials.');
-        window.location.href = 'login.html';
-      } else {
-        alert('Signup Failed: ' + result.message);
-      }
-    });
+    document.addEventListener("DOMContentLoaded", () => renderNavbar("home"));
   </script>
-
 </body>
 </html>

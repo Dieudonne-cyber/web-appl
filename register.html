@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | AI Recognition &amp; Chatbot System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="site-navbar"></div>
+
+  <main>
+    <div class="container narrow">
+      <div class="card">
+        <h1 class="page-title">Create an Account</h1>
+
+        <div class="form-message" id="form-message" role="alert"></div>
+
+        <form id="register-form" novalidate>
+          <div class="form-field">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+            <p class="field-error" id="fullName-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username" required />
+            <p class="field-error" id="username-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+            <p class="field-error" id="email-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="new-password" required />
+            <p class="field-error" id="password-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required />
+            <p class="field-error" id="confirmPassword-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+
+        <p class="form-footnote">Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 AI-Powered Image Recognition and Intelligent Chatbot System — Web Design Project.
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => renderNavbar("register"));
+  </script>
+</body>
+</html>

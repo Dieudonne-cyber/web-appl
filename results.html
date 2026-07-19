@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results | AI Recognition &amp; Chatbot System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="site-navbar"></div>
+
+  <main>
+    <div class="container">
+      <h1 class="page-title">Image Recognition Results</h1>
+
+      <div class="panel text-center" id="empty-state" style="display:none;">
+        <p>You haven't uploaded an image yet.</p>
+        <a href="upload.html" class="btn btn-primary">Upload an Image</a>
+      </div>
+
+      <div class="results-grid" id="result-view" style="display:none;">
+        <div class="card">
+          <img id="result-image" alt="" />
+          <p class="upload-filename" id="result-filename"></p>
+        </div>
+
+        <div class="panel">
+          <p class="result-label">Detected Label</p>
+          <p class="result-value" id="result-label"></p>
+
+          <p class="result-label">Confidence Score</p>
+          <p class="result-value" id="result-confidence"></p>
+          <div class="confidence-bar"><span id="confidence-bar-fill" style="width:0%"></span></div>
+
+          <p class="result-label">Suggested Action</p>
+          <p class="result-value" id="result-suggestion"></p>
+
+          <button type="button" class="btn btn-secondary" id="ask-chatbot-btn">Ask the Chatbot</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 AI-Powered Image Recognition and Intelligent Chatbot System — Web Design Project.
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>
